@@ -1,0 +1,90 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        
+        vector<vector<int>>ans;
+        
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        
+        for(int i=0;i<n;i++)
+        {
+            int target3=target-nums[i];
+            
+            for(int j=i+1;j<n;j++)
+            {
+                int target2=target3-nums[j];
+                
+                int low=j+1,high=n-1;
+                
+                while(low<high)
+                {
+                    int sum=nums[low]+nums[high];
+                    
+                    if(sum>target2)
+                    {
+                        high--;
+                    }
+                    else if(sum<target2)
+                    {
+                        low++;
+                    }
+                    else
+                    {
+                        vector<int>v;
+                        v.push_back(nums[i]);
+                        v.push_back(nums[j]);
+                        v.push_back(nums[low]);
+                        v.push_back(nums[high]);
+                        
+                        ans.push_back(v);
+                        
+                        
+                        while(low<high and nums[low]==v[2])
+                        {
+                            low++;
+                        }
+                        
+                        while(low<high and nums[high]==v[3])
+                        {
+                            high--;
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+                while(j+1<n and nums[j+1]==nums[j])
+                {
+                    j++;
+                }
+                
+                
+                
+            }
+        
+            
+            
+            while(i+1<n and nums[i+1]==nums[i])
+            {
+                i++;
+            }
+            
+        
+            
+        }
+        
+        
+        
+        
+        return ans;
+        
+        
+        
+    }
+};
