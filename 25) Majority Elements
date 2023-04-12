@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int size = nums.size() / 3;
+        vector<int> output;
+        set<int> s(nums.begin(), nums.end());
+        for(auto i : s)
+        {
+            int count = 0;
+            for(auto j : nums)
+            {
+                if(i == j) count++;
+            }
+            if(count > size) output.push_back(i);
+        }
+        return output;
+    }
+};
