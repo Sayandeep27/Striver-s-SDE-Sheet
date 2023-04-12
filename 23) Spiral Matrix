@@ -1,0 +1,102 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+     
+        
+        vector<int>ans;
+        int row=matrix.size();
+        int col=matrix[0].size();
+        
+        int total=row*col;
+        int count=0;
+        
+        int startingrow=0;
+        int startingcol=0;
+        int endingrow=row-1;
+        int endingcol=col-1;
+        
+        
+      while(startingrow<=endingrow and startingcol<=endingcol)
+      {
+          
+         // printing first row
+          
+          for(int i=startingcol;i<=endingcol;i++)
+          {
+              ans.push_back(matrix[startingrow][i]);
+              
+              count++;
+              if(count>total-1)
+              {
+                  return ans;
+              }
+          
+          }
+          startingrow++;
+          
+          
+          
+          
+          // printing last col
+          for(int i=startingrow;i<=endingrow;i++)
+          {
+              ans.push_back(matrix[i][endingcol]);
+              
+              count++;
+              if(count>total-1)
+              {
+                  return ans;
+              }
+          }
+          endingcol--;
+          
+          
+          
+          // printing last row
+          
+          for(int i=endingcol;i>=startingcol;i--)
+          {
+              ans.push_back(matrix[endingrow][i]);
+              
+              count++;
+              if(count>total-1)
+              {
+                  return ans;
+              }
+          }
+          endingrow--;
+          
+          
+          
+          // printing first col
+          
+          for(int i=endingrow;i>=startingrow;i--)
+          {
+              ans.push_back(matrix[i][startingcol]);
+              
+              count++;
+              if(count>total-1)
+              {
+                  return ans;
+              }
+          }
+          startingcol++;
+          
+          
+          
+   
+          
+      }
+        
+        
+        
+        
+        
+        return ans;
+        
+        
+        
+        
+        
+    }
+};
