@@ -1,0 +1,49 @@
+class Solution {
+
+public:
+   
+      bool is_pick(int row,int col,vector<vector<int>>&mat)
+    {
+        int n=mat.size(); int m=mat[0].size();
+        
+         int delrow[]={-1,0,+1,0};
+         int delcol[]={0,+1,0,-1};
+
+        for(int i=0;i<4;i++)
+        {
+            int newrow = row + delrow[i];
+            int newcol = col + delcol[i];
+
+            if(newrow>=0 and newrow<n and newcol>=0 and newcol<m and mat[newrow][newcol]>mat[row][col])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+ 
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        
+        
+
+        int n=mat.size();
+        int m=mat[0].size();
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(is_pick(i,j,mat))
+                {
+                    return {i,j};
+                }
+            }
+        }
+
+
+     return {-1,-1};
+
+        
+    }
+};
