@@ -1,0 +1,58 @@
+class Solution {
+public:
+
+bool check(int mid,vector<int>&arr,int m,int k)
+{
+    int n=arr.size();
+
+    int flower=0,bouquet=0;
+
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]<=mid)
+        {
+            flower++;
+        }
+        else
+        {
+            flower=0;
+        }
+
+        if(flower>=k)
+        {
+            bouquet++;
+            flower=0;
+        }
+    }
+
+
+    return bouquet>=m;
+}
+
+int minDays(vector<int>& arr, int m, int k) {
+   
+      int n=arr.size();
+
+      int start=1,end=1e9+1;
+
+      int ans=-1;
+
+      while(start<=end)
+      {
+          int mid=start+(end-start)/2;
+
+          if(check(mid,arr,m,k))
+          {
+              ans=mid;
+              end=mid-1;
+          }
+          else
+          {
+              start=mid+1;
+          }
+      }
+
+   return ans;
+
+}
+};
