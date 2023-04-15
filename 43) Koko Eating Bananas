@@ -1,0 +1,52 @@
+class Solution {
+public:
+
+    bool check(int k,vector<int>&piles,int h)
+    {
+        int n=piles.size();
+
+        int time=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            int lol=piles[i]/k; 
+            int lmao=piles[i]%k;
+
+            if(lmao>0) lol++;
+
+            time+=lol;
+        }
+
+        return time<=h;
+        
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) {
+        
+         int n=piles.size();
+
+         int lo=1,hi=INT_MAX;
+
+         int ans=INT_MAX;
+
+         while(lo<=hi)
+         {
+             int mid=lo+(hi-lo)/2;
+
+             if(check(mid,piles,h))
+             {
+                 ans=mid;
+                 hi=mid-1;
+             }
+             else
+             {
+                 lo=mid+1;
+             }
+         }
+
+
+         return ans;
+
+
+    }
+};
