@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int myAtoi(string s) {
+         
+          int n=s.size();
+
+          int i=0,j=n-1;
+
+
+         while(s[i]==' ')
+         {
+             i++;
+         }
+
+        
+         bool flag=false;
+
+         if(s[i]=='-')
+         {
+             flag=true;
+             i++;
+         }
+         else if(s[i]=='+')
+         {
+             i++;
+         } 
+
+
+        double ans=0;
+
+        while(i<n and s[i] >= '0' and s[i] <= '9')
+        {
+            ans=(ans*10)+(s[i]-'0');
+            i++;
+        }
+
+        if(flag)
+        {
+            ans=(-1*(ans));
+        }
+
+
+        if(ans>INT_MAX) return INT_MAX;
+
+        if(ans<INT_MIN) return INT_MIN;
+        
+
+        return int(ans);
+
+
+    }
+};
