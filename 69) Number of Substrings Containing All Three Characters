@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+
+       int n=s.size();
+
+       int cnt=0;
+
+       map<int,int>mp;
+
+       int i=0,j=0;
+
+       while(j<n and i<n)
+       {
+            mp[s[j]]++;
+
+            if(mp.size()<3)
+            {
+                 j++;
+            }
+            else if(mp.size()==3)
+            {
+                while(mp.size()==3)
+                {
+                    cnt+=(n-j);
+                    
+                    mp[s[i]]--;
+
+                    if(mp[s[i]]==0) mp.erase(s[i]);
+
+                    i++;
+                }
+
+                j++;
+            }
+            
+
+       }  
+
+
+
+       return cnt;
+      
+
+
+    }
+};
