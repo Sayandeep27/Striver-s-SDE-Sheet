@@ -1,0 +1,44 @@
+class Solution {
+public:
+    
+     int lookup(char c)
+    {
+        switch(c)
+        {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
+    
+    int romanToInt(string s) {
+        
+        auto sum = 0;
+        auto size = s.size();
+        
+        for (auto i = 0; i < size; i++)
+        {
+            auto curr_char = s[i];
+            auto char_val = lookup(s[i]);
+            
+            if (i+1 < size && char_val < lookup(s[i+1]))
+            {
+                sum -= char_val;
+            }
+            else
+            {
+                sum += char_val;
+            }
+        }
+        
+        return sum;
+        
+        
+        
+    }
+};
