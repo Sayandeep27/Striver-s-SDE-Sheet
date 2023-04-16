@@ -1,0 +1,47 @@
+class Solution
+{
+  public:
+  
+    long long int f(string s,int k)
+    {
+        long long int i=0,j=0;
+        long long int n=s.size();
+        
+        long long int ans=0;
+        
+        map<long long int,long long int>mp;
+        
+        while(j<n)
+        {
+            mp[s[j]]++;
+            
+            while(i<j and mp.size()>k)
+            {
+                mp[s[i]]--;
+                
+                if(mp[s[i]]==0) mp.erase(s[i]);
+                
+                i++;
+            }
+            
+            
+            ans+=(j-i+1);
+            
+            j++;
+        }
+        
+        return ans;
+        
+    }
+  
+  
+    long long int substrCount (string s, int k) {
+    	//code here.
+    	
+    	
+    	
+    	return f(s,k)-f(s,k-1);
+    	
+    
+    }
+};
