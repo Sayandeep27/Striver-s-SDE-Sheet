@@ -1,0 +1,63 @@
+
+class Solution {
+public:
+
+    bool check(int mid,int n,int k,vector<int>&stalls,set<int>&st)
+    {
+        int dist=stalls[0];
+        
+        int cnt=1;
+        
+        for(int i=1;i<n;i++)
+        {
+            if(stalls[i]-dist>=mid)
+            {
+                cnt++;
+                dist=stalls[i];
+            }
+            
+            
+            if(cnt==k) return true;
+        }
+        
+        return false;
+        
+    }
+   
+
+
+    int solve(int n, int k, vector<int> &stalls) {
+    
+        
+        sort(stalls.begin(),stalls.end());
+        
+        int start=1;
+        int end=stalls[n-1]-stalls[0];
+        int ans=-1;
+        
+        set<int>st;
+        
+        for(int i=0;i<n-1;i++) st.insert(stalls[i+1]-stalls[i]);
+         
+        
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
+            
+            if(check(mid,n,k,stalls,st))
+            {
+                ans=mid;
+                start=mid+1;
+            }
+            else
+            {
+                end=mid-1;
+            }
+        }
+        
+        
+        return ans;
+         
+        
+    }
+};
