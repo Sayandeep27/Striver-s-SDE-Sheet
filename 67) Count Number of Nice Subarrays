@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+         
+
+         int n=nums.size();
+
+         // first we will convert-  odd-> 1 and even-> 0
+
+         for(int i=0;i<n;i++)
+         {
+             if(nums[i]%2==0)
+             {
+                 nums[i]=0;
+             }
+             else
+             {
+                 nums[i]=1;
+             }
+         }
+
+
+         // now it has become count subarray sums k
+
+         map<int,int>mp;
+
+         int cnt=0;
+         int sum=0;
+
+         for(int i=0;i<n;i++)
+         {
+             sum+=nums[i];
+             
+             if(sum==k) cnt++;
+
+             if(mp.find(sum-k)!=mp.end())
+             {
+                 cnt+=mp[sum-k];
+             }
+
+
+             mp[sum]++;
+         } 
+
+         return cnt;
+          
+    }
+};
