@@ -1,0 +1,70 @@
+class Solution {
+public:
+
+   bool solve(int row,int col,int n,int m,int index,string word,vector<vector<char>>&board)
+   {
+         // base case
+         if(index==word.size()) return true;
+
+
+       int delrow[]={-1,0,+1,0};
+       int delcol[]={0,+1,0,-1};
+
+       for(int i=0;i<4;i++)
+       {
+           int newrow=row+delrow[i];
+           int newcol=col+delcol[i];
+
+           if(newrow<0 or newrow>=n or newcol<0 or newcol>=m or board[newrow][newcol]=='1' or board[newrow][newcol]!=word[index])
+           {
+               continue;
+           } 
+
+         
+         char ch=board[newrow][newcol];
+
+         board[newrow][newcol]='1';
+
+         if(solve(newrow,newcol,n,m,index+1,word,board)) return true;
+
+         board[newrow][newcol]=ch;
+
+
+       }
+
+
+       return false;
+
+
+
+   }
+
+
+    bool exist(vector<vector<char>>& board, string word) {
+        
+         int n=board.size();
+         int m=board[0].size();
+
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(board[i][j]==word[0])
+                {
+                    char ch=board[i][j];
+
+                    board[i][j]='1';
+
+                    if(solve(i,j,n,m,1,word,board)) return true;
+
+                    board[i][j]=ch;
+                }
+            }
+        }
+
+
+        return false;
+
+    }
+};
