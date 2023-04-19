@@ -1,0 +1,98 @@
+class Solution {
+public:
+
+    bool valid(int row,int col,vector<string>temp)
+    { 
+
+        int n=temp.size();
+
+        for(int col=0;col<n;col++)
+        {
+            if(temp[row][col]!='.') return false;
+        }
+
+
+        for(int row=0;row<n;row++)
+        {
+            if(temp[row][col]!='.') return false;
+
+        }
+
+        int i=row,j=col;
+        
+        while(i>=0 and j>=0)
+        {
+             if(temp[i][j]!='.') return false;
+             i--;
+             j--;
+        }
+
+
+         i=row,j=col;
+
+        while(i>=0 and j<n)
+        {
+            if(temp[i][j]!='.') return false;
+
+            i--;
+            j++;
+        }
+
+
+        return true;
+
+
+    }
+  
+    void solve(int index,int cnt,int n,vector<string>temp,vector<vector<string>>&ans)
+    {
+        // base case
+
+        if(cnt==n)
+        {
+            ans.push_back(temp);
+            return;
+        }
+
+        if(index>=n) return;
+
+
+
+        for(int row=0;row<n;row++)
+        {
+            if(valid(index,row,temp))
+            {
+                temp[index][row]='Q';
+
+                solve(index+1,cnt+1,n,temp,ans);
+
+                temp[index][row]='.';
+            }
+        }
+
+
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+    
+      vector<vector<string>>ans;
+
+      vector<string>temp;  // matrix  
+      
+      string str=""; 
+
+      for(int i=0;i<n;i++) str+='.';
+
+
+      for(int i=0;i<n;i++) temp.push_back(str);
+
+
+
+      solve(0,0,n,temp,ans);
+
+
+      return ans;
+
+
+    }
+};
