@@ -1,10 +1,14 @@
 class Solution {
 public:
-
-   bool solve(int row,int col,int n,int m,int index,string word,vector<vector<char>>&board)
+   
+   bool solve(int row,int col,vector<vector<char>>&grid,string &word,int index)
    {
-         // base case
-         if(index==word.size()) return true;
+       
+       int n=grid.size();
+       int m=grid[0].size();
+
+       // base case
+       if(index==word.size()) return true;
 
 
        int delrow[]={-1,0,+1,0};
@@ -15,50 +19,42 @@ public:
            int newrow=row+delrow[i];
            int newcol=col+delcol[i];
 
-           if(newrow<0 or newrow>=n or newcol<0 or newcol>=m or board[newrow][newcol]=='1' or board[newrow][newcol]!=word[index])
+           if(newrow>=0 and newcol>=0 and newrow<n and newcol<m and grid[newrow][newcol]!='1' and word[index]==grid[newrow][newcol])
            {
-               continue;
-           } 
+               char ch=grid[newrow][newcol];
 
-         
-         char ch=board[newrow][newcol];
+               grid[newrow][newcol]='1';
 
-         board[newrow][newcol]='1';
+               if(solve(newrow,newcol,grid,word,index+1)) return true;
 
-         if(solve(newrow,newcol,n,m,index+1,word,board)) return true;
-
-         board[newrow][newcol]=ch;
-
-
+               grid[newrow][newcol]=ch;
+           }
        }
 
 
-       return false;
-
-
+     return false;
 
    }
 
-
-    bool exist(vector<vector<char>>& board, string word) {
+    bool exist(vector<vector<char>>& grid, string word) {
         
-         int n=board.size();
-         int m=board[0].size();
-
+        int n=grid.size();
+        int m=grid[0].size();
+        int index=0;
 
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(board[i][j]==word[0])
+                if(grid[i][j]==word[0])
                 {
-                    char ch=board[i][j];
+                   char ch= grid[i][j];
 
-                    board[i][j]='1';
+                   grid[i][j]='1';
 
-                    if(solve(i,j,n,m,1,word,board)) return true;
+                    if(solve(i,j,grid,word,index+1)) return true;
 
-                    board[i][j]=ch;
+                    grid[i][j]=ch;
                 }
             }
         }
