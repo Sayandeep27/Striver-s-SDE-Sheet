@@ -1,0 +1,43 @@
+class Solution {
+public:
+
+void sol( vector<string>&v,map<char,string>m,string digits,string ans,int index){
+    if(index>=digits.size()){
+         v.push_back(ans);
+        return;
+    }
+    
+    for(int i=0;i<m[digits[index]].size();i++){
+        ans.push_back(m[digits[index]][i]);
+         
+        index++;
+        sol(v,m,digits,ans,index);
+        index--;
+        ans.pop_back();
+      
+    }
+    
+   
+    
+}
+
+vector<string> letterCombinations(string digits) {
+   
+    map<char,string>m;
+    string ans="";
+    vector<string>v;
+     if(digits.empty())return v;
+   m['2']="abc";
+    m['3']="def";
+    m['4']="ghi";
+    m['5']="jkl";
+    m['6']="mno";
+    m['7']="pqrs";
+    m['8']="tuv";
+    m['9']="wxyz";
+    int index=0;
+    sol(v,m,digits,ans,index);
+    return v;
+    
+}
+};
