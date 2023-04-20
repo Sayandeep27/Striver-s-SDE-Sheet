@@ -1,0 +1,56 @@
+class Solution {
+public:
+   
+    
+    void solve(int i,int sum,int target,vector<int>&temp,vector<int>&candidates,vector<vector<int>>&ans)
+    {
+         // base case
+
+         if(sum>target) return;
+
+         if(sum==target)
+         {
+             ans.push_back(temp);
+
+             return;
+         }
+
+
+         for(int j=i;j<candidates.size();j++)
+         {
+             temp.push_back(candidates[j]);
+
+             sum+=candidates[j];
+
+             solve(j,sum,target,temp,candidates,ans);
+
+             sum-=candidates[j];
+
+             temp.pop_back();
+         }
+ 
+
+
+
+
+    }
+
+
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+         
+         vector<vector<int>>ans;
+
+         vector<int>temp;
+
+         int i=0;
+
+         int sum=0;
+
+
+         solve(i,sum,target,temp,candidates,ans);
+
+         return ans;
+
+    }
+};
