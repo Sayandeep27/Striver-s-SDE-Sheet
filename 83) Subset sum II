@@ -1,0 +1,54 @@
+class Solution {
+public:
+    
+    set<vector<int>>s;
+    
+    void solve(int i,vector<int>&nums,vector<int>temp)
+    {
+        if(i>=nums.size())   // base condition
+        {
+            s.insert(temp);
+            return;
+        }
+        
+        
+        
+        // exclude
+        
+        solve(i+1,nums,temp);
+        
+        
+        // include
+        
+        temp.push_back(nums[i]);
+        solve(i+1,nums,temp);
+        
+        
+        
+        return;
+        
+    }
+    
+    
+    
+    
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        
+        vector<int>temp;
+        
+        sort(nums.begin(),nums.end());
+        
+        solve(0,nums,temp);
+        
+        
+        vector<vector<int>>ans;
+        
+        for(auto it:s)
+        {
+            ans.push_back(it);
+        }
+        
+        return ans;
+        
+    }
+};
