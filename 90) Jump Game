@@ -1,0 +1,38 @@
+class Solution {
+public:
+
+    bool solve(int i,int n,vector<int>&nums,vector<int>&dp)
+    {
+        // base cases
+        if(i==n-1) return true;
+        if(i>=n) return false;
+
+        if(dp[i]!=-1) return dp[i];
+
+        int x=nums[i];
+
+        bool temp=false;
+
+        for(int k=1;k<=x;k++)
+        {
+             temp=(temp or solve(i+k,n,nums,dp));
+        }
+
+      return dp[i]= temp;
+
+    }
+  
+
+    bool canJump(vector<int>& nums) {
+         
+         int n=nums.size();
+
+         int i=0;
+
+        vector<int>dp(n,-1);
+
+         return solve(i,n,nums,dp);
+
+
+    }
+};
