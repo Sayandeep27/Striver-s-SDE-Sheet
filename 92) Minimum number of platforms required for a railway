@@ -1,0 +1,30 @@
+ int findPlatform(int arr[], int dep[], int n)
+    {
+        sort(arr,arr+n);
+        
+        sort(dep,dep+n);
+        
+        int i=0,j=0;
+        
+        int platform=0;
+        int maxi=0;
+        
+        while(i<n)
+        {
+            if(arr[i]<=dep[j])
+            {
+                platform++;
+                i++;
+            }
+            else
+            {
+                platform--;
+                j++;
+            }
+            
+            maxi=max(maxi,platform);
+        }
+        
+        return maxi;
+    	
+    }
