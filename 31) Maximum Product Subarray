@@ -1,18 +1,33 @@
 class Solution {
 public:
-int maxProduct(vector<int>&v){
-int ans=INT_MIN,n=v.size(),sum=1;
-for(int i=0;i<n;i++){
-sum*=v[i];
-ans=max(ans,sum);
-if(sum==0)sum=1;
-}
-sum=1;
-for(int i=n-1;i>=0;i--){
-sum*=v[i];
-ans=max(ans,sum);
-if(sum==0)sum=1;
-}
-return ans;
-}
+    int maxProduct(vector<int>& nums) {
+
+        int n=nums.size();
+        int ans=INT_MIN;
+
+        int res=1;
+
+        for(int i=0;i<n;i++)
+        {
+            res=res*nums[i];
+
+            ans=max(ans,res);
+
+            if(res==0) res=1;
+        }
+        
+        res=1;
+
+        for(int i=n-1;i>=0;i--)
+        {
+            res=res*nums[i];
+            ans=max(ans,res);
+
+            if(res==0) res=1;
+        }
+
+        return ans;
+        
+         
+    }
 };
