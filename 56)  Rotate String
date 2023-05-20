@@ -1,23 +1,23 @@
 class Solution {
 public:
-    bool rotateString(string s, string t) {
+    bool rotateString(string s, string goal) {
         
-      int n=s.size();
-      int m=t.size();
+        int n=s.size();
+        int m=goal.size();
 
-      if(s==t) return true;
+        if(n!=m) return false;
 
-      if(n!=m) return false;
-
-      t=t+t;
-
-      int found=t.find(s);
-
-      if(t.size()>=found) return true;
+        if(s==goal) return true;
 
 
-      return false;
+        goal=goal+goal;
 
+        int found=goal.find(s);
+
+        if(goal.size()>=found) return true;
+
+
+        return false;
 
     }
 };
