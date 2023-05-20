@@ -2,7 +2,8 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
          
-         vector<vector<int>>ans;
+        vector<vector<int>>ans;
+        set<vector<int>>st;
 
          int n=nums.size();
 
@@ -24,12 +25,10 @@ public:
                       temp.push_back(nums[start]);
                       temp.push_back(nums[end]);
 
-                      ans.push_back(temp);
+                   
+                     st.insert(temp);
 
                       start++;
-
-                      while(start<end and nums[start]==nums[start-1]) start++;
-
 
                  }
                  else if(nums[i]+nums[start]+nums[end]>0)
@@ -43,7 +42,11 @@ public:
              }
          }
 
+
+         for(auto it:st) ans.push_back(it);
+
          return ans;
+
 
     }
 };
